@@ -1,5 +1,5 @@
 <template>
-    <div class="block" v-if="showBlock" @click="endGame">Click Me{{ delay }}</div>
+    <div class="block" v-if="showBlock" @click="endGame">Click Me</div>
 </template>
 
 <script>
@@ -17,18 +17,19 @@ export default {
     mounted(){
         setTimeout(() => {
             this.showBlock = true
+            this.startTimer()
         }, this.delay);
-    },
-    updated(){
-        this.timer = setInterval(() => {
-            this.score += 50
-        },50);
     },
     methods : {
         endGame(){
             this.$emit('endGame',this.score)
             this.showBlock = false
             clearInterval(this.timer)
+        },
+        startTimer(){
+            this.timer = setInterval(() => {
+                this.score += 50 
+            }, 50);
         }
     }
 }
